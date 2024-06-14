@@ -10,8 +10,8 @@ app.set('port', process.env.PORT || 4000);
 app.use(cors());
 app.use(express.json());
 //ROUTES
-app.get('/api/users',(req, res) => res.send('Users Routes'));
-app.get('/api/hours',(req, res) => res.send('Hours Routes'));
+app.use('/api/employee',require('./routes/employee'))
+app.use('/api/hours',require('./routes/hours'));
 
 
 
