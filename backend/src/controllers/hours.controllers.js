@@ -1,6 +1,18 @@
 const hoursCtrl = {};
-hoursCtrl.getHours = (req, res) => res.json({ message: [] });
-hoursCtrl.createHours = (req, res) => res.json({ message: 'Horas cargadas' });
+
+const hour = require('../models/hours');
+
+hoursCtrl.getHours = async (req, res) => {
+    const hours = await hour.find();
+    res.json(hours)
+};
+
+hoursCtrl.createHours = async(req, res) => {
+    const { hourEmpleado } = req.body;
+    const newHour = new hour({ hourEmpleado });
+    await newHour.save();
+    res.json('hora cargada');
+}
 
 
 hoursCtrl.getHour = (req, res) => res.json({ title: 'nnc' });

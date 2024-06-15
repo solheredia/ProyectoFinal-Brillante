@@ -1,9 +1,9 @@
 const {Schema, model } = require('mongoose');
 
 const hoursSchema = new Schema ({
-    empleado: int,
-    content: {
-        type: int,
+    Empleado: Number,
+    Hora: {
+        type: Number,
         required:true
         
     },
@@ -13,4 +13,4 @@ const hoursSchema = new Schema ({
 });
 
 //coleccion horas
-module.export = model ('Hours', hoursSchema);
+module.exports = model ('Hours', hoursSchema);

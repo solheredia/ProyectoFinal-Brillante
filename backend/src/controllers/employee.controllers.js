@@ -1,5 +1,6 @@
 const emplCtrl = {};
 
+const employee = require('../models/employee');
 const empleado = require('../models/employee');
 
 emplCtrl.getEmpls = async (req, res) => {
@@ -7,17 +8,39 @@ emplCtrl.getEmpls = async (req, res) => {
     res.json(empleados);
 }
 
-emplCtrl.createEmpl = (req, res) => {
-
+emplCtrl.createEmpl = async (req, res) => {
+    const { name, servicio, date, author } = req.body;
+    const newEmpleado = new employee({
+        name: name,
+        servicio: servicio,
+        date: date,
+        author: author
+    })
+    await newEmpleado.save();
     res.json({ message: 'Empleados cargados' });
 
 };
 
-emplCtrl.getEmpl = (req, res) => res.json({ nombre: 'nnc' });
+emplCtrl.getEmpl = async (req, res) => {
 
-emplCtrl.updateEmpl = (req, res) => res.json({ message: 'Empleado actualizados' });
+    const empleado = await employee.findById(req.params.id);
+    res.json(empleado);
+}
+emplCtrl.updateEmpl = async(req, res) => {
+    const {name, servicio, author, date}= req.body;
+   await employee.findOneAndUpdate({_id: req.params.id}, {
+        name,
+        servicio,
+        author
+    })
+    res.json({ message: 'Empleado actualizados' })
+};
 
-emplCtrl.deleteEmpl = (req, res) => res.json({ message: 'Empleado eliminado' });
+emplCtrl.deleteEmpl = async (req, res) => {
+    const empleado = await employee.findByIdAndDelete(req.params.id)
+    res.json({ message: 'Empleado eliminado' })
+}
+
 emplCtrl.patchEmpl = (req, res) => res.json({ message: 'dato modificado' });
 module.exports = emplCtrl
 

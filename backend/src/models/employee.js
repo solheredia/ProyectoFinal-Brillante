@@ -1,17 +1,20 @@
 const {Schema, model } = require('mongoose');
 
 const employeeSchema = new Schema ({
-    title: String,
-    content: {
+    name: String,
+    servicio: {
         type: String,
         required:true,
         trim:true,
-        unique:true
     },
     author: String,
+    date: {
+        type:Date,
+        default: Date.now
+    }
 }, {
     timestamps:true
 });
 
 //coleccion empleado
-module.export = model ('Empleado', employeeSchema);
+module.exports = model ('Empleado', employeeSchema);
