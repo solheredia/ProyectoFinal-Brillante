@@ -1,13 +1,13 @@
 const {Schema, model } = require('mongoose');
 
 const hoursSchema = new Schema ({
-    Empleado: Number,
-    Hora: {
-        type: Number,
-        required:true
-        
-    },
+    IdEmpleado: Number,
+    Hora: Number,
     author: String,
+    date:{
+        type: Date,
+        default: Date.now
+    },
 }, {
     timestamps:true
 });

@@ -9,6 +9,6 @@ router.route('/:id')
     .get(getHour)
     .put(putHours)
     .delete(deleteHours)
-    .patch(patchHours)
+    
 
 module.exports = router;

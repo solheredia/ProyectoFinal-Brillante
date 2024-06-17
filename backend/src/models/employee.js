@@ -8,6 +8,7 @@ const employeeSchema = new Schema ({
         trim:true,
     },
     author: String,
+    documento: Number,
     date: {
         type:Date,
         default: Date.now

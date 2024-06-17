@@ -1,24 +1,52 @@
 const hoursCtrl = {};
 
-const hour = require('../models/hours');
+const hours = require('../models/hours');
 
 hoursCtrl.getHours = async (req, res) => {
-    const hours = await hour.find();
-    res.json(hours)
+    const hour = await hours.find();
+    res.json(hour)
 };
 
-hoursCtrl.createHours = async(req, res) => {
-    const { hourEmpleado } = req.body;
-    const newHour = new hour({ hourEmpleado });
+hoursCtrl.createHours = async (req, res) => {
+    const { IdEmpleado, hora, author, date } = req.body;
+    const newHour = new hours({
+        IdEmpleado,
+        hora,
+        author,
+        date,
+    });
     await newHour.save();
-    res.json('hora cargada');
+    res.json({ message: 'hora cargada' });
 }
 
 
-hoursCtrl.getHour = (req, res) => res.json({ title: 'nnc' });
-hoursCtrl.putHours = (req, res) => res.json({ message: 'Horas actualizadas' });
-hoursCtrl.deleteHours = (req, res) => res.json({ message: 'Hora eliminada' });
-hoursCtrl.patchHours = (req, res) => res.json({ message: 'dato modificado' });
+hoursCtrl.getHour = async (req, res) => {
+    const hour = await hours.findById(req.params.id);
+    res.json(hour);
+}
+
+
+
+hoursCtrl.putHours = async (req, res) =>
+    {
+        const{IdEmpleado, Hora, author,date} =req.body;
+        await hours.findByIdAndUpdate(req.params.id, {
+            IdEmpleado,
+            Hora,
+            author,
+            date
+
+        })
+        res.json({ message: 'Horas actualizadas' });
+    } 
+
+        
+        
+hoursCtrl.deleteHours = async (req, res) => {
+    await hours.findByIdAndDelete(req.params.id)
+    res.json({ message: 'Hora eliminada' })
+};
+
 
 
 

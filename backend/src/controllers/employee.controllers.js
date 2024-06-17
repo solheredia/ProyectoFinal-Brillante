@@ -9,12 +9,13 @@ emplCtrl.getEmpls = async (req, res) => {
 }
 
 emplCtrl.createEmpl = async (req, res) => {
-    const { name, servicio, date, author } = req.body;
+    const { name, servicio, date, author, documento } = req.body;
     const newEmpleado = new employee({
         name: name,
         servicio: servicio,
         date: date,
-        author: author
+        author: author,
+        documento: documento
     })
     await newEmpleado.save();
     res.json({ message: 'Empleados cargados' });
@@ -27,20 +28,21 @@ emplCtrl.getEmpl = async (req, res) => {
     res.json(empleado);
 }
 emplCtrl.updateEmpl = async(req, res) => {
-    const {name, servicio, author, date}= req.body;
+    const {name, servicio, author, documento, date}= req.body;
    await employee.findOneAndUpdate({_id: req.params.id}, {
         name,
         servicio,
-        author
+        author,
+        documento
     })
     res.json({ message: 'Empleado actualizados' })
 };
 
 emplCtrl.deleteEmpl = async (req, res) => {
-    const empleado = await employee.findByIdAndDelete(req.params.id)
+     await employee.findByIdAndDelete(req.params.id)
     res.json({ message: 'Empleado eliminado' })
 }
 
-emplCtrl.patchEmpl = (req, res) => res.json({ message: 'dato modificado' });
+
 module.exports = emplCtrl
 
