@@ -1,51 +1,30 @@
 //import { useState } from 'react'
-import { createBrowserRouter , RouterProvider as Route } from "react-router-dom";
+//import { createBrowserRouter , RouterProvider as Route } from "react-router-dom";
 
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Navigation from "./components/navigation"
 import CreateEmployee from "./components/createEmployee"
 import CreateHour from "./components/createHours"
 import Login from "./components/login"
-import EmployeeList from "./components/employeeList"
+//import EmployeeList from "./components/employeeList"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+//import React from 'react';
+
 
 function App() {
   return (
-    const router = createBrowserRouter([
-      {
-          path:'/',
-          element:<EmployeeList/>,
-          errorElement:<ErrorCustom/>
-      },
-      {
-          path:'/edit/:id',
-          element:<CreateEmployee/>,
-          errorElement:<ErrorCustom/>
-      },
-      {
-          path:'/create',
-          element:<CreateHour/>,
-          errorElement:<ErrorCustom/>
-      },
-      {
-          path:'/user',
-          element:<CreateEmployee/>,
-          errorElement:<ErrorCustom/>
-      },
-  
-  ])
-  
-  class App extends Component {
-      render() {
-          return (
-              <>
-                  <Navigation/>
-                  <RouterProvider router={router}/>
-                  </>
-
-        )
-    }
-}
+    <BrowserRouter>
+          <Navigation />
+          <Routes>
+          <Route path='/' element={<Login />}/>
+          <Route  path='/edit/:id'element={<CreateEmployee/>}/>
+          <Route path = '/create/hour' element = {<CreateHour/>}/>
+          <Route path = 'ingresar' element = {<Login/>}/>
+          <Route path = '/create/user' element = {<CreateEmployee/>}/>
+        </Routes>
+        </BrowserRouter>
+  );
 }
 
-  //ver codigo porq esta mal se supone q es el actualizado no del video !
-
-export default App
+export default App;
