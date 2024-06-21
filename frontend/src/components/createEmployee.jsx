@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default class createEmployee extends Component {
   state={
-    employee[]
+    employee: []
   }
   async componentDidMount() {
     const res = await axios.get('http://localhost:4000/api/employee')
