@@ -4,6 +4,7 @@ import { FaUser, FaUnlockKeyhole } from "react-icons/fa6";
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import CreateEmployee from './createEmployee';
 
 const Login = () => {
 
@@ -11,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error,setError] =useState('');
   const history = useHistory();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -18,18 +20,18 @@ const Login = () => {
       const { success, token, user } = response.data;
       if (success) {
         localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(CreateEmployee));
         if (user.role === 'admin') {
           history.push('/admin');
         } else {
           history.push('/employee');
         }
-      } else {
-        setError('Login failed. Please check your credentials and try again.');
       }
     } catch (error) {
       console.error('Login failed:', error);
-      setError('Login failed. Please check your credentials and try again.');
+      setError('Login failed.Please check your credentials and try again')
+      alert('Login failed. Please check your credentials and try again.');
+      
     }
   };
 
