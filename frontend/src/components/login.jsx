@@ -3,12 +3,8 @@ import '../styles/login.css';
 import { FaUser, FaUnlockKeyhole } from "react-icons/fa6";
 
 
+
 const Login = () => {
-
-
-
-
-
 
 
   return (
@@ -39,9 +35,10 @@ const Login = () => {
           <label><input className="lab-inp" type="checkbox" />Remember me</label>
           <a href="#">Forgot password?</a>
         </div>
-        <button className="boton" type='submit'>Ingresar</button>
+        <button className="boton" type='submit' >Ingresar</button>
 
       </form>
+
     </div>
 
 

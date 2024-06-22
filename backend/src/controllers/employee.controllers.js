@@ -46,3 +46,4 @@ emplCtrl.deleteEmpl = async (req, res) => {
 
 module.exports = emplCtrl
 
+

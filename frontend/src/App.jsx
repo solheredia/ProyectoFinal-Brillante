@@ -7,6 +7,7 @@ import CreateEmployee from "./components/createEmployee"
 import CreateHour from "./components/createHours"
 import Login from "./components/login"
 import EmployeeList from "./components/employeeList" //use la ruta asiq la descomente
+import Empleado from "./components/empleado"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 //import React from 'react';
@@ -26,6 +27,7 @@ function App() {
           <Route path='/create/user' element={<CreateEmployee />} />
           <Route path='navigation' element ={<Navigation/>}/>
           <Route path='lista' element ={<EmployeeList/>}/>
+          <Route path='emp' element ={<Empleado/>}/>
         </Routes>
       </div>
     </BrowserRouter>
