@@ -1,18 +1,29 @@
 //import React from 'react';
+import '../styles/login.css';
+import { FaUser, FaUnlockKeyhole} from "react-icons/fa6";
+
 
 const Login = () => {
   return (
-    <div>
-      <form>
-        <div className="mb-3">
-          <label htmlFor="usuario" className="form-label">Usuario</label>
-          <input type="usuario" className="form-control" id="usuario" />
+    <div className='wrapper'>
+
+      <form className='conteiner'>
+        <h2 className="title">Login Brillante</h2>
+        <div className="input-box">
+            <input className="box"type="text" placeholder='Usuario' required />
+            <FaUser className='icon'/>
+
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" id="password" />
+        <div className="input-box">
+            <input className='box' type="password" placeholder='Password' required/>
+            <FaUnlockKeyhole className='icon'/>
+
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <div className="remember-forgot">
+          <label><input type="checkbox" />Remember me</label>
+          <a href="#">Forgot password?</a>
+        </div>
+        <button type='submit'>Ingresar</button>
       </form>
     </div>
 
