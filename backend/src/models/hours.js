@@ -4,6 +4,7 @@ const hoursSchema = new Schema ({
     IdEmpleado: Number,
     Hora: Number,
     author: String,
+    
     date:{
         type: Date,
         default: Date.now

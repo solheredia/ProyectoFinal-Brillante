@@ -8,10 +8,10 @@ hoursCtrl.getHours = async (req, res) => {
 };
 
 hoursCtrl.createHours = async (req, res) => {
-    const { IdEmpleado, hora, author, date } = req.body;
+    const { IdEmpleado, Hora, author, date } = req.body;
     const newHour = new hours({
         IdEmpleado,
-        hora,
+        Hora,
         author,
         date,
     });
