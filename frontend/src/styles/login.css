@@ -1,15 +1,26 @@
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:url('../img/fondoNav.jpeg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 .wrapper {
-    border: 3px black solid;
     border-radius: 10px;
     background: rgb(254,250,246);
     padding: 30px 40px;
+    color: black;
+    border: 3px solid black;
 
 
 }
 
 .title {
-
-    font-size: large;
+    font-family: monospace;
+    font-size: 25px;
     text-align: center;
 }
 
@@ -20,15 +31,16 @@
     margin: 35px 0;
 }
 
-.box {
+ .box{
     width: 100%;
     height: 100%;
     background: transparent;
+    border: 1px solid rgba(91, 28, 28, 0.267);
     outline: none;
-    border: 2px rgba(255, 255, 255, .2);
     border-radius: 40px;
     font-size: 16px;
     padding: 25px 45px 20px 20px;
+    color: black;
 }
 
 .box::placeholder {
@@ -47,4 +59,36 @@
     justify-content: space-between;
     font-size: 14.5px;
     margin: -15px 0 15px;
+}
+.lab-inp{
+    accent-color: black;
+    margin-right: 4px;
+}
+.remember-forgot a{
+    color: black;
+    text-decoration: none;
+}
+.remember-forgot a:hover{
+    text-decoration: underline;
+}
+.boton{
+    width: 100%;
+    height: 45px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(0, 0,0,.1);
+    cursor:pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+
+}
+.boton:hover{
+    background: #0056b3;
+}
+.error-message{
+    color: red;
+    margin-top: 10px;
 }
