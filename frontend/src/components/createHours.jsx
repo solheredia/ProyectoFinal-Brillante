@@ -101,8 +101,8 @@ const CreateHours = () => {
     };
 
     const deleteHour =(id) =>{
-      axios.delete('http://localhost:3500' + id)
-      console.log(id)
+      axios.delete('http://localhost:3500/api/hours' + id)
+     
     }
 
   return (
