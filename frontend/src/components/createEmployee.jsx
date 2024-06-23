@@ -194,6 +194,7 @@ const CreateEmployee = () => {
 
   return (
     <div className="row">
+      <Link to='/navigation' >Volver a inicio</Link>
       <div className="col-md-8 p-2">
         <div className="card card-body">
           <h3>Añadir nuevo empleado</h3>

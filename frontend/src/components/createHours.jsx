@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Link } from 'react-router-dom';
 
 const CreateHours = () => {
   const [empleados, setEmpleados] = useState([]);
@@ -58,7 +59,10 @@ const CreateHours = () => {
   };
 
   return (
-    <div className="col-md-8 p-2">
+    <div> 
+    <Link to='/navigation' >Volver a inicio</Link>
+    <div className="col-md-20 p-2">
+      
       <div className="card card-body">
         <h4>Cargar Horas</h4>
         {/**SELECT EMPLEADO */}
@@ -75,6 +79,7 @@ const CreateHours = () => {
             ))}
           </select>
         </div>
+        <br />
         <div className="form-group">
           <input
             type="text"
@@ -85,6 +90,7 @@ const CreateHours = () => {
             required
           />
         </div>
+        <br />
         <div className="form-group">
           <DatePicker
             className="form-control"
@@ -92,24 +98,22 @@ const CreateHours = () => {
             onChange={onChangeDate}
           />
         </div>
+        <br />
         <form onSubmit={onSubmit}>
           <button type="submit" className="btn btn-primary">
             Actualizar
           </button>
+          <Link className='btn btn-secondary ' to={'/listaHoras'}>Ver lista horas</Link>
         </form>
       </div>
+    </div>
     </div>
   );
 };
 
 export default CreateHours;
 
-
-
-
-
-//solucionar fecha
-//solucionar id empleado
 //tipos de acceso
-// q se suban los empleados y las horas
-// que quede todo bonito 
+//vista empleados 
+// que quede todo bonito
+//poder editar las horas 

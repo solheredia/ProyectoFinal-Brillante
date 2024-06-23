@@ -9,9 +9,6 @@ const Navigation = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            {/*<li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Cerrar </a>
-            </li>*/}
             <li className="nav-item">
               <a className="nav-link" href="/create/hour">Cargar Horas</a>
             </li>
@@ -20,6 +17,9 @@ const Navigation = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="lista">Lista Empleados</a>
+            </li>
+             <li className="nav-item">
+              <a className="nav-link" href="listaHoras">Lista Horas </a>
             </li>
           </ul>
         </div>

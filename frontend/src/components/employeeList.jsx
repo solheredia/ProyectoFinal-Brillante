@@ -5,14 +5,21 @@ import { Link } from 'react-router-dom';
 
 const EmployeeList = () => {
   const [empleados, setEmpleados] = useState([]);
+  const [filtroNombre, setFiltroNombre] = useState('');
+  const [empleadosFiltrados, setEmpleadosFiltrados] = useState([]);
 
   useEffect(() => {
     getEmployee();
   }, []);
 
   const getEmployee = async () => {
-    const res = await axios.get('http://localhost:3500/api/employee');
+   try {
+   const res = await axios.get('http://localhost:3500/api/employee');
     setEmpleados(res.data);
+    setEmpleadosFiltrados(res.data);
+   } catch (error){
+    console.log("Error al obtener los empleados", error);
+   }
   };
 
   const deleteEmployee = async (id) => {
@@ -20,11 +27,34 @@ const EmployeeList = () => {
     getEmployee();
   };
 
+  const handleInputChange = (e) => {
+    setFiltroNombre(e.target.value);
+    filterEmployees(e.target.value);
+  };
+  const filterEmployees = (filterValue) => {
+    if (filterValue.trim() === '') {
+      setEmpleadosFiltrados(empleados); // Si el filtro está vacío, mostrar todos los empleados
+    } else {
+      const filtered = empleados.filter((empleado) =>
+        empleado.name.toLowerCase().includes(filterValue.toLowerCase())
+      );
+      setEmpleadosFiltrados(filtered);
+    }
+  };
+
   return (
     <div>
+        <input
+        type="text"
+        className="form-control mb-3"
+        placeholder="Buscar por nombre..."
+        value={filtroNombre}
+        onChange={handleInputChange}
+      />
       <div className="row">
-        {empleados.map((empleado) => (
-          <div className="col-md-5 p-1" key={empleado._id}>
+        <Link to='/navigation' >Volver a inicio</Link>
+        {empleadosFiltrados.map((empleado) => (
+          <div className="col-md-12 p-2" key={empleado._id}>
             <div className="card">
               <div className="card-header">
                 <h6>Empleado: {empleado.name}</h6>
