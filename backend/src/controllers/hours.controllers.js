@@ -8,11 +8,10 @@ hoursCtrl.getHours = async (req, res) => {
 };
 
 hoursCtrl.createHours = async (req, res) => {
-    const { Name, Hora, author, date } = req.body;
+    const { Name, Hora, date } = req.body;
     const newHour = new hours({
         Name,
         Hora,
-        author,
         date,
     });
     await newHour.save();
@@ -29,11 +28,10 @@ hoursCtrl.getHour = async (req, res) => {
 
 hoursCtrl.putHours = async (req, res) =>
     {
-        const{Name, Hora, author,date} =req.body;
+        const{Name, Hora,date} =req.body;
         await hours.findByIdAndUpdate(req.params.id, {
             Name,
             Hora,
-            author,
             date
 
         })

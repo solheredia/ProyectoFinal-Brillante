@@ -7,8 +7,6 @@ const employeeSchema = new Schema ({
         required:true,
         trim:true,
     },
-    author: String,
-    documento: Number,
     date: {
         type:Date,
         default: Date.now

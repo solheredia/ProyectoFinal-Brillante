@@ -1,91 +1,119 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 
 const CreateEmployee = () => {
-  const [employees, setEmployees] = useState([]);
+  const [/*employees*/, setEmployees] = useState([]);
   const [name, setName] = useState('');
   const [servicio, setServicio] = useState('');
+  const [id, setId] = useState('');
+  const { id: routeId } = useParams();
+  const [editing, setEditing] = useState(false);
+
 
   useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const res = await axios.get('http://localhost:3500/api/employee');
-        setEmployees(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
-    fetchEmployees();
-  }, []);
+    if (routeId) {
+      const fetchEmployee = async () => {
+        try {
+          const res = await axios.get(`http://localhost3500/api/employee/&{routeId}`)
+          setName(res.data.name);
+          servicio(res.data.servicio);
+          setEditing(true);
+          setId(routeId);
 
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
+        } catch (error) {
+          console.error('Error fetching employee:', error);
+        }
+      };
+      fetchEmployee();
+    }
+  }, [routeId]);
 
-  const onChangeServicio = (e) => {
-    setServicio(e.target.value);
-  };
 
-  const fetchEmployee = async () => {
+  const fetchEmployees = async () => {
     try {
+
       const res = await axios.get('http://localhost:3500/api/employee');
+
       setEmployees(res.data);
       console.log(res.data);
     } catch (error) {
-      console.error('Error fetching employee:', error);
+      console.error('Error fetching employees:', error);
     }
   };
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const res = await axios.post('http://localhost:3500/api/employee', {
-          name: name,
-          servicio: servicio,
-        });
-        console.log(res);
-        fetchEmployee();
-        setName('');
-        setServicio('');
-      } catch (error) {
-        console.error('Error adding hour:', error);
-      }
-    };
 
-    const deleteEmployee = async (id) =>{
-     await axios.delete('http://localhost:3500/api/employee/' + id);
-     fetchEmployee();
+
+
+
+/*const onChangeName = (e) => {
+  setName(e.target.value);
+};
+
+const onChangeServicio = (e) => {
+  setServicio(e.target.value);
+};*/
+
+/*const fetchEmployee = async () => {
+  try {
+    const res = await axios.get('http://localhost:3500/api/employee');
+    setEmployees(res.data);
+    console.log(res.data);
+  } catch (error) {
+    console.error('Error fetching employee:', error);
+  }
+}*/
+const onSubmit = async (e) => {
+  e.preventDefault();
+  const newEmployee = {name, servicio};
+  try{
+    if(editing) {
+      await axios.put(`http://localhost:3500/api/employee/${id}`, newEmployee)
+    }else{
+      await axios.post('http://localhost3500/api/employee', newEmployee)
     }
+    console.log('Empleado guardado');
+    fetchEmployees();
+    setName('');
+    setServicio('');
 
-  return (
-    <div className="row">
-      <div className="col-md-4">
-        <div className="card card-body">
-          <h3>Añadir nuevo empleado</h3>
-          <form action="" onSubmit={onSubmit}>
-            <div className="form-group">
-              <p> Nombre empleado</p>
-              <input
-                type="text"
-                className="form-control"
-                value={name}
-                onChange={onChangeName}
-              />
-              <p>Servicio empleado</p>
-              <input
-                type="text"
-                className="form-control"
-                value={servicio}
-                onChange={onChangeServicio}
-              />
-            </div>
-            <div>
-            <button type='submit' className='btn btn-primary'>cargar</button>
-            </div>
-          </form>
-        </div>
+  }catch (error){
+    console.error('Error al guardar el empleado', error)
+  }
+
+
+};
+return (
+  <div className="row">
+    <div className="col-md-8 p-2">
+      <div className="card card-body">
+        <h3>Añadir nuevo empleado</h3>
+        <form action="" onSubmit={onSubmit}>
+          <div className="form-group">
+            <p> Nombre empleado</p>
+            <input
+              type="text"
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder='Name'
+            />
+            <p>Servicio empleado</p>
+            <input
+              type="text"
+              className="form-control"
+              value={servicio}
+              onChange={(e)=>setServicio(e.target.value)}
+              placeholder='Servicio'
+            />
+          </div>
+          <div className='btn d-flex justify-content-between'>
+            <button type='submit' className='btn btn-primary mx-6 p-2'>Guardar</button>
+            <Link className='btn btn-secondary ' to={'/lista'}>Ver lista</Link>
+          </div>
+        </form>
       </div>
-      <div className="col-md-8">
+    </div>
+    {/**<div className="col-md-8">
         <ul className="list-group">
           {employees.map((employee) => (
             <li className="list-group-item list-group-item-action" 
@@ -98,9 +126,10 @@ const CreateEmployee = () => {
             </li>
           ))}
         </ul>
-      </div>
-    </div>
-  );
+      </div>*/}
+  </div>
+);
 };
+
 
 export default CreateEmployee;

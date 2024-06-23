@@ -9,13 +9,12 @@ emplCtrl.getEmpls = async (req, res) => {
 }
 
 emplCtrl.createEmpl = async (req, res) => {
-    const { name, servicio, date, author, documento } = req.body;
+    const { name, servicio, date } = req.body;
     const newEmpleado = new employee({
         name: name,
         servicio: servicio,
         date: date,
-        author: author,
-        documento: documento
+        
     })
     await newEmpleado.save();
     res.json({ message: 'Empleados cargados' });
@@ -28,12 +27,11 @@ emplCtrl.getEmpl = async (req, res) => {
     res.json(empleado);
 }
 emplCtrl.updateEmpl = async(req, res) => {
-    const {name, servicio, author, documento, date}= req.body;
+    const {name, servicio, date}= req.body;
    await employee.findOneAndUpdate({_id: req.params.id}, {
         name,
         servicio,
-        author,
-        documento
+        date
     })
     res.json({ message: 'Empleado actualizados' })
 };

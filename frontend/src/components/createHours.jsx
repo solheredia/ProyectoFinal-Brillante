@@ -121,17 +121,28 @@ export default class CreateHours extends Component {
   state = {
     empleados: [],
     empleadoSelect: "",
-    hora: "",
+    Hora: "",
     date: new Date()
   }
   async componentDidMount() {
     const res = await axios.get('http://localhost:3500/api/employee')
-    this.setState({ empleados: res.data.map(empleado => empleado.name) })
+    this.setState({
+       empleados: res.data.map(empleado => empleado.name), 
+    
+      })
     console.log(this.state.empleados);
   }
-   onSubmit = (e) => {
-    console.log(this.state.hora );
-    e.preventDefault();
+   onSubmit = async (e) => {
+    e.preventDefault()
+    const newHour = {
+      Name: this.state.empleadoSelect,
+      Hora: this.state.Hora,
+      date: this.state.date
+    }
+    const res = await axios.post('http://localhost:3500/api/hours', newHour)
+    console.log(res);
+    //window.location.href = 'lista';
+
   }
   onInputChange = e =>{
     console.log(e.target.name, e.target.value);
@@ -146,7 +157,7 @@ export default class CreateHours extends Component {
   }
   render() {
     return (
-      <div className="col-md-6 offset-md-3">
+      <div className="col-md-8 p-2">
         <div className="card card-body">
           <h4>Cargar Horas</h4>
           {/**SELECT EMPLEADO */}
@@ -168,7 +179,7 @@ export default class CreateHours extends Component {
           </div>
           <div className="form-group">
             <input type="text" 
-            className="form-contorl" 
+            className="form-control md-4 p-2 " 
             placeholder="Hora"
             name="Hora"
             onChange={this.onInputChange} 
