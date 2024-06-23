@@ -1,46 +1,3 @@
-/*import { useState, useEffect } from 'react';
-import axios from 'axios';
-
-
-const CreateHours = () => {
-  const [hour, setHour] = useState([]);
-  const [Name, setName] = useState('');
-  const [Hora, setHora] = useState('');
-
-  useEffect(() => {
-    const fetchHour = async () => {
-      try {
-        const res = await axios.get('http://localhost:3500/api/hours');
-        setHour(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.error('Error fetching hours:', error);
-      }
-    };
-    fetchHour();
-  }, []);
-
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const onChangeHora = (e) => {
-    setHora(e.target.value);
-  };
-
-
-
- const onSubmit = async e => {
-  e.preventDefault();
-  const res= await axios.post('http://localhost:3500/api/hours',{
-    Name: this.state.Name,
-    Hora: this.state.Hora
-  })
-  console.log(res);
-  
-  
- }*/
-
   import { useState, useEffect } from 'react';
   import axios from 'axios';
   
@@ -53,7 +10,7 @@ const CreateHours = () => {
       const fetchHour = async () => {
         try {
           const res = await axios.get('http://localhost:3500/api/hours');
-          setHour(res.data);
+          setHour(res.data); 
           console.log(res.data);
         } catch (error) {
           console.error('Error fetching hours:', error);
