@@ -1,4 +1,65 @@
-import { Component } from 'react'
+import  { useState, useEffect } from 'react';
+import axios from 'axios';
+import { format } from 'timeago.js';
+import { Link } from 'react-router-dom';
+
+const EmployeeList = () => {
+  const [empleados, setEmpleados] = useState([]);
+
+  useEffect(() => {
+    getEmployee();
+  }, []);
+
+  const getEmployee = async () => {
+    const res = await axios.get('http://localhost:3500/api/employee');
+    setEmpleados(res.data);
+  };
+
+  const deleteEmployee = async (id) => {
+    await axios.delete(`http://localhost:3500/api/employee/${id}`);
+    getEmployee();
+  };
+
+  return (
+    <div>
+      <div className="row">
+        {empleados.map((empleado) => (
+          <div className="col-md-5 p-1" key={empleado._id}>
+            <div className="card">
+              <div className="card-header">
+                <h6>Empleado: {empleado.name}</h6>
+              </div>
+              <div className="card-body">
+                <p>Servicio: {empleado.servicio}</p>
+                <p>Ingreso: {format(empleado.date)}</p>
+              </div>
+              <div className="card-footer">
+                <div className="btn d-flex justify-content-between">
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteEmployee(empleado._id)}
+                  >
+                    Eliminar
+                  </button>
+                  <Link className="btn btn-secondary" to={`/edit/${empleado._id}`}>
+                    Editar
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default EmployeeList;
+
+
+
+
+/*import { Component } from 'react'
 import axios from 'axios'
 import { format } from 'timeago.js'
 import { Link } from 'react-router-dom'
@@ -58,4 +119,4 @@ export default class employeeList extends Component {
       </div>
     )
   }
-}
+}*/

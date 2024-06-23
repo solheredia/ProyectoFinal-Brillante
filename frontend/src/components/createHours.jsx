@@ -1,209 +1,109 @@
-import { Component } from "react";
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css';
 
-/*import { useState, useEffect } from 'react';
- 
 const CreateHours = () => {
-  const [hour, setHour] = useState([]);
-  const [Name, setName] = useState('');
+  const [empleados, setEmpleados] = useState([]);
+  const [empleadoSelect, setEmpleadoSelect] = useState('');
   const [Hora, setHora] = useState('');
- 
+  const [date, setDate] = useState(new Date());
+
   useEffect(() => {
-    const fetchHour = async () => {
+    const fetchEmployees = async () => {
       try {
-        const res = await axios.get('http://localhost:3500/api/hours');
-        setHour(res.data); 
-        console.log(res.data);
+        const res = await axios.get('http://localhost:3500/api/employee');
+        setEmpleados(res.data.map(empleado => empleado.name));
       } catch (error) {
-        console.error('Error fetching hours:', error);
+        console.error('Error fetching employees:', error);
       }
     };
-    fetchHour();
-  }, []);
- 
- 
 
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
- 
-  const onChangeHora = (e) => {
-    setHora(e.target.value);
-  };
- 
-  
-const fetchHours = async () => {
-  try {
-    const res = await axios.get('http://localhost:3500/api/hours');
-    setHour(res.data);
-    console.log(res.data);
-  } catch (error) {
-    console.error('Error fetching hours:', error);
-  }
-};
+    fetchEmployees();
+  }, []);
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    const newHour = {
+      Name: empleadoSelect,
+      Hora,
+      date
+    };
+
     try {
-      const res = await axios.post('http://localhost:3500/api/hours', {
-        Name: Name,
-        Hora: Hora
-      });
+      const res = await axios.post('http://localhost:3500/api/hours', newHour);
       console.log(res);
-      // Después de agregar exitosamente, actualiza la lista de horas
-      fetchHours(); // Llama a fetchHour para obtener la lista actualizada
-      // Limpia los campos después de enviar el formulario
-      setName('');
-      setHora('');
+      //window.location.href = 'lista';
     } catch (error) {
-      console.error('Error adding hour:', error);
+      console.error('Error submitting hours:', error);
     }
   };
 
-  const deleteHour = async (id) =>{
-   await axios.delete('http://localhost:3500/api/hours/' + id);
-   fetchHours();
-  }
-
-return (
-  <div className="row">
-    <div className="col-md-4">
-      <div className="card card-body">
-        <h3>Cargar horas</h3>
-        <form action="" onSubmit={onSubmit}>
-          <div className="form-group">
-            <p>Empleado</p>
-            <input
-              type="text"
-              className="form-control"
-               value={Name}
-              onChange={onChangeName}
-            />
-            <p>Horas Realizadas</p>
-            <input
-              type="text"
-              className="form-control"
-              value={Hora}
-              onChange={onChangeHora}
-            />
-          </div>
-          <div>
-            <button type='submit' className='btn btn-primary'>cargar</button>
-          </div>
-        </form>
-
-      </div>
-    </div>
-    <div className="col-md-8">
-      <ul className="list-group">
-        {hour.map((hour) => (
-          <li className="list-group-item list-group-item-action" 
-          key={hour._id}
-          onDoubleClick={() => deleteHour(hour._id)}
-          >
-           
-            empleado:{hour.Name}
-            <br />
-            fecha{hour.date}
-            <br />
-            horas realizadas:{hour.Hora}
-          </li>
-        ))}
-      </ul>
-    </div>
-  </div>
-);
-};
-
-export default CreateHours;*/
-export default class CreateHours extends Component {
-  state = {
-    empleados: [],
-    empleadoSelect: "",
-    Hora: "",
-    date: new Date()
-  }
-  async componentDidMount() {
-    const res = await axios.get('http://localhost:3500/api/employee')
-    this.setState({
-       empleados: res.data.map(empleado => empleado.name), 
-    
-      })
-    console.log(this.state.empleados);
-  }
-   onSubmit = async (e) => {
-    e.preventDefault()
-    const newHour = {
-      Name: this.state.empleadoSelect,
-      Hora: this.state.Hora,
-      date: this.state.date
-    }
-    const res = await axios.post('http://localhost:3500/api/hours', newHour)
-    console.log(res);
-    //window.location.href = 'lista';
-
-  }
-  onInputChange = e =>{
+  const onInputChange = (e) => {
     console.log(e.target.name, e.target.value);
-    this.setState({
-      [e.target.name]: e.target.value
+    switch (e.target.name) {
+      case 'empleadoSeleccionado':
+        setEmpleadoSelect(e.target.value);
+        break;
+      case 'Hora':
+        setHora(e.target.value);
+        break;
+      default:
+        break;
+    }
+  };
 
-    })
-  }
-  
-  onChangeDate = date =>{
-    this.setState({date})
-  }
-  render() {
-    return (
-      <div className="col-md-8 p-2">
-        <div className="card card-body">
-          <h4>Cargar Horas</h4>
-          {/**SELECT EMPLEADO */}
-          <div className="form-group">
-            <select
-              className="form-control"
-              name="empleadoSeleccionado"
-              onChange={this.onInputChange}
-            >
+  const onChangeDate = (date) => {
+    setDate(date);
+  };
 
-              {
-                this.state.empleados.map(empleado =>
-                <option key={empleado} value={empleado}>
-                  {empleado}
-                </option>)
-              }
-
-            </select>
-          </div>
-          <div className="form-group">
-            <input type="text" 
-            className="form-control md-4 p-2 " 
+  return (
+    <div className="col-md-8 p-2">
+      <div className="card card-body">
+        <h4>Cargar Horas</h4>
+        {/**SELECT EMPLEADO */}
+        <div className="form-group">
+          <select
+            className="form-control"
+            name="empleadoSeleccionado"
+            onChange={onInputChange}
+          >
+            {empleados.map(empleado => (
+              <option key={empleado} value={empleado}>
+                {empleado}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control md-4 p-2"
             placeholder="Hora"
             name="Hora"
-            onChange={this.onInputChange} 
+            onChange={onInputChange}
             required
-            />
-          </div>
-          <div className="form-group">
-            <DatePicker
-            className="form-control"
-            selected={this.state.date}
-            onChange={this.onChangeDate}
-            />
-            
-          </div>
-          
-          <form onSubmit={this.onSubmit}>
-
-            <button type="submit" className="btn btn-primary">Actualizar</button>
-          </form>
+          />
         </div>
+        <div className="form-group">
+          <DatePicker
+            className="form-control"
+            selected={date}
+            onChange={onChangeDate}
+          />
+        </div>
+        <form onSubmit={onSubmit}>
+          <button type="submit" className="btn btn-primary">
+            Actualizar
+          </button>
+        </form>
       </div>
-    )
-  }
-}
+    </div>
+  );
+};
+
+export default CreateHours;
+
 
 
 
