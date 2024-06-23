@@ -40,8 +40,7 @@ const ListaHoras = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() => deleteHours(hora._id)}
-                  >
-                    Eliminar Hora
+                  >Eliminar
                   </button>
                   <Link className="btn btn-secondary" to={`/editHour/${hora._id}`}>Editar Hora</Link>
                 </div>

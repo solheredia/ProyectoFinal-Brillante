@@ -114,6 +114,5 @@ const CreateHours = () => {
 export default CreateHours;
 
 //tipos de acceso
-//vista empleados 
 // que quede todo bonito
 //poder editar las horas 

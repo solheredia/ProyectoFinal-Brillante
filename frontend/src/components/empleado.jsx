@@ -16,7 +16,7 @@ const EmployeePanel = () => {
     try {
       const res = await axios.get('http://localhost:3500/api/employee');
       setEmpleados(res.data);
-      setEmpleadosFiltrados(res.data); // Inicialmente todos los empleados son mostrados
+      setEmpleadosFiltrados(res.data);
     } catch (error) {
       console.error('Error al obtener los empleados:', error);
     }
@@ -40,7 +40,7 @@ const EmployeePanel = () => {
   return (
     <div>
       <div className="row">
-        <h3>Panel Empleados</h3>
+        <h3 className='text-white'>Panel Empleados</h3>
         <input
           type="text"
           className="form-control mb-3"
@@ -67,43 +67,3 @@ const EmployeePanel = () => {
 };
 
 export default EmployeePanel;
-
- /* este se va x el de arriba return (
-    <div>
-      <div className="row">
-        <h3>Panel Empleados</h3>
-        {empleados.map((empleado) => (
-          <div className="col-md-3 p-2" key={empleado._id}>
-            <div className="card">
-              <div className="card-header">
-                <h6>Empleado: {empleado.name}</h6>
-              </div>
-              <div className="card-body">
-                <p>Servicio: {empleado.servicio}</p>
-                <p>Ingreso: {format(empleado.date)}</p>
-              </div>
-              {/*<div className="card-footer">
-                <div className="btn d-flex justify-content-between">
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteEmployee(empleado._id)}
-                  >
-                    Eliminar
-                  </button>
-                  <Link className="btn btn-secondary" to={`/edit/${empleado._id}`}>
-                    Editar
-                  </Link>
-        }
-                </div>
-              </div>
-}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-    
-
-export default EmployeePanel;*/
