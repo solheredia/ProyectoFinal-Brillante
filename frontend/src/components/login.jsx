@@ -2,10 +2,7 @@
 import '../styles/login.css';
 import { FaUser, FaUnlockKeyhole } from "react-icons/fa6";
 
-
-
 const Login = () => {
-
 
   return (
     <div className='wrapper'>
@@ -17,7 +14,6 @@ const Login = () => {
             className="box"
             type="text"
             placeholder='Usuario'
-
             required />
           <FaUser className='icon' />
 
@@ -26,7 +22,6 @@ const Login = () => {
           <input className='box'
             type="password"
             placeholder='Password'
-
             required />
           <FaUnlockKeyhole className='icon' />
 

@@ -100,14 +100,12 @@ const CreateHours = () => {
       }
     };
 
-    const deleteHour =(id) =>{
-      axios.delete('http://localhost:3500/api/hours' + id)
-     
+    const deleteHour = async (id) =>{
+     await axios.delete('http://localhost:3500/api/hours/' + id);
+     fetchHours();
     }
 
   return (
-
-
     <div className="row">
       <div className="col-md-4">
         <div className="card card-body">
