@@ -1,6 +1,8 @@
 import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'timeago.js';
+import{Link} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const EmployeePanel = () => {
   const [empleados, setEmpleados] = useState([]);
@@ -39,6 +41,7 @@ const EmployeePanel = () => {
 
   return (
     <div>
+    <div>
       <div className="row">
         <h3 className='text-white'>Panel Empleados</h3>
         <input
@@ -62,6 +65,14 @@ const EmployeePanel = () => {
           </div>
         ))}
       </div>
+    </div>
+    <div className="position-fixed top-0 end-0 m-3">
+      <div className="btn btn-outline-white">
+        <Link to='/ingresar' className="text-decoration-none text-white">
+          Cerrar Sesión
+        </Link>
+      </div>
+    </div>
     </div>
   );
 };

@@ -195,25 +195,28 @@ const CreateEmployee = () => {
   return (
     <div className="row">
       <Link to='/navigation' >Volver a inicio</Link>
-      <div className="col-md-8 p-2">
+      <div className="col-md-10 p-2">
         <div className="card card-body">
           <h3>Añadir nuevo empleado</h3>
           <form onSubmit={onSubmit}>
-            <div className="form-group">
+            <div className="form-group ">
+              
               <p> Nombre empleado</p>
               <input
                 type="text"
                 className="form-control"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder='Name'
+                placeholder='Nombre'
               />
+              <br />
               <p>Servicio empleado</p>
               <input
                 type="text"
                 className="form-control"
                 value={servicio}
                 onChange={(e) => setServicio(e.target.value)}
+                placeholder='Servicio'
               />
             </div>
             <div className='btn d-flex justify-content-between'>
