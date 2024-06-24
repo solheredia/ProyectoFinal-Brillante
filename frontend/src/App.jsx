@@ -1,6 +1,3 @@
-//import { useState } from 'react'
-//import { createBrowserRouter , RouterProvider as Route } from "react-router-dom";
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navigation from "./components/navigation" //lo descomento pq ahora lo usamos
 import CreateEmployee from "./components/createEmployee"
@@ -12,15 +9,12 @@ import ListaHoras from "./components/hoursList.jsx"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import CreateHours from './components/createHours';
-//import React from 'react';
 
 
 function App() {
   return (
     <BrowserRouter>
       <div className='container p-4'>
-
-        { /* <Navigation /> */}
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/edit/:id' element={<CreateEmployee />} />

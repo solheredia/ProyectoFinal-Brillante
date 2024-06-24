@@ -11,12 +11,12 @@ import { FaUser, FaUnlockKeyhole } from "react-icons/fa6";
     const handleSubmit = (e) => {
       e.preventDefault();
   
-      // Aquí realizarías la autenticación (ejemplo simplificado)
+      // autenticacion de admin ruben
       if (username === 'Ruben Gonzalez' && password === 'admin123') {
-        // Si es admin, redireccionar a /navigation
+        //redirrecion a navigation
         navigate('/navigation');
       } else {
-        // Si es empleado, redireccionar a /emp (aquí puedes implementar la lógica para empleados)
+        // redireccion para empleados
         navigate('/emp');
       }
     };

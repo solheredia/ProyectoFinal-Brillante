@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import { FaItalic } from 'react-icons/fa6';
+
 
 const Navigation = () => {
   return (
